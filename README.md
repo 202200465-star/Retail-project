@@ -1,5 +1,5 @@
 # Retail-project
-Full-stack B2C retail e-commerce web application developed  Includes product catalog, authentication, shopping cart, and checkout system.
+Full-stack B2C retail e-commerce web application developed using react.js and node.js / express  Includes product catalog, authentication, shopping cart, and checkout system.
 # 📌 Project Overview
 
 This project is a full-stack B2C retail e-commerce web application developed as part of the EC385 Introduction to E-Business course.
