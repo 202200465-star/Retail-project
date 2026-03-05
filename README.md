@@ -110,7 +110,7 @@ Performance Optimization
 
 # 🛠️ Technology Stack
 Frontend:
-   React.js 
+   React.js (Vite) 
 
 Backend:
 
