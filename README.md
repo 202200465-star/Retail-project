@@ -1,3 +1,5 @@
+# Name : Rahma Ahmed Fekry
+# ID : 202200465
 # Retail-project ecommerce
 Full-stack B2C retail e-commerce web application developed using react.js and node.js / express  Includes product catalog, authentication, shopping cart, and checkout system.
 # 📌 Project Overview

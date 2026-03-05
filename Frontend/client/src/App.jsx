@@ -7,6 +7,7 @@ export default function App() {
     <>
       <LandingPage />
       <ProductsList />
+      <h1>hekloo</h1>
     </>
   );
 }
