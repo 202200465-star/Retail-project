@@ -33,7 +33,7 @@ export default function ProductsList() {
 
         <div className="row g-4">
           {products.map((p) => (
-            <div className="col-md-4" key={p.id}>
+            <div className="col-md-4" key={p._id}>
               <div className="card h-100 shadow-sm">
                 <div className="card-body">
                   <div className="badge bg-primary mb-2">API</div>

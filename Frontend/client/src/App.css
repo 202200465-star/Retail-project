@@ -112,3 +112,57 @@
   background-color: #dc3545;
   color: white;
 }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.custom-navbar {
+  background: linear-gradient(90deg, #0f172a, #1d4ed8, #0ea5e9);
+}
+
+.landing-hero {
+  min-height: 90vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80")
+      center/cover no-repeat;
+}
+
+.auth-card {
+  max-width: 500px;
+  border-radius: 18px;
+}
+
+.products-page-bg {
+  background: linear-gradient(180deg, #f8fbff, #eef7ff);
+  min-height: 100vh;
+}
+
+.admin-page-bg {
+  background: linear-gradient(135deg, #1e293b, #334155, #0f766e);
+  min-height: 100vh;
+}
+
+.product-card {
+  border-radius: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card {
+  border-radius: 18px;
+}
+
+.btn {
+  border-radius: 10px;
+}
