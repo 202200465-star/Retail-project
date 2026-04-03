@@ -8,6 +8,9 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import ProductsPage from "./Components/ProductsPage";
 import AdminDashboard from "./Components/AdminDashboard";
+import Profile from "./Components/Profile";
+import AboutUs from "./Components/AboutUs";
+import ContactUs from "./Components/ContactUs";
 
 export default function App() {
   const [page, setPage] = useState("landing");
@@ -40,6 +43,9 @@ export default function App() {
       {page === "login" && <Login handleLogin={handleLogin} />}
       {page === "register" && <Register setPage={setPage} />}
       {page === "products" && <ProductsPage />}
+      {page === "profile" && <Profile user={user} setUser={setUser} />}
+      {page === "about" && <AboutUs setPage={setPage} />}
+      {page === "contact" && <ContactUs />}
       {page === "admin" && user?.role === "admin" && <AdminDashboard />}
     </div>
   );

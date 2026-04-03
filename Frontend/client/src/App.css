@@ -129,9 +129,10 @@ body {
 
 .landing-hero {
   min-height: 90vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80")
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80")
       center/cover no-repeat;
+  background-attachment: fixed;
 }
 
 .auth-card {
@@ -165,4 +166,72 @@ body {
 
 .btn {
   border-radius: 10px;
+}
+
+/* Interactive Animations & Styles for About and Contact Us */
+.about-hero {
+  background: linear-gradient(135deg, rgba(29, 38, 113, 0.9), rgba(195, 55, 100, 0.9)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80') center/cover;
+  min-height: 400px;
+}
+
+.interactive-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.interactive-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.interactive-form .form-control:focus {
+  box-shadow: 0 0 15px rgba(13, 110, 253, 0.25);
+  border-color: #0d6efd;
+}
+
+.interactive-btn {
+  transition: all 0.3s ease;
+}
+
+.interactive-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.interactive-btn:active {
+  transform: scale(0.98);
+}
+
+.interactive-map {
+  transition: transform 0.3s ease;
+}
+
+.interactive-map:hover {
+  transform: scale(1.01);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-fade-in-up.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
