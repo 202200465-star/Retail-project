@@ -14,7 +14,7 @@ const getProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).select("+password");
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
@@ -23,6 +23,13 @@ const updateProfile = async (req, res) => {
     user.email = req.body.email || user.email;
 
     if (req.body.password) {
+      if (!req.body.currentPassword) {
+        return res.status(400).json({ success: false, message: "Current password is required to change password" });
+      }
+      const isMatch = await user.matchPassword(req.body.currentPassword);
+      if (!isMatch) {
+        return res.status(401).json({ success: false, message: "Invalid current password" });
+      }
       user.password = req.body.password;
     }
 

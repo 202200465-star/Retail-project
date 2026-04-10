@@ -1,5 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login({ handleLogin }) {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ function Login({ handleLogin }) {
   });
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -21,9 +23,11 @@ function Login({ handleLogin }) {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", formData);
+      const response = await axiosInstance.post("/auth/login", formData);
       alert("Logged in successfully");
       handleLogin(response.data);
+      if (response.data.role === "admin") navigate("/admin");
+      else navigate("/products");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     } finally {

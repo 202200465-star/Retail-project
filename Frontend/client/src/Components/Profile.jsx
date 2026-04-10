@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance, { getImageUrl } from "../config/axiosInstance";
 
 function Profile({ user, setUser }) {
   const [profile, setProfile] = useState({ name: "", email: "", profilePhoto: "" });
@@ -7,12 +7,12 @@ function Profile({ user, setUser }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const API_URL = "http://localhost:5000/api/users/profile";
+  const API_URL = "/users/profile";
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(API_URL, {
+        const response = await axiosInstance.get(API_URL, {
           headers: { Authorization: `Bearer ${user.token}` }
         });
         setProfile(response.data.data);
@@ -32,11 +32,18 @@ function Profile({ user, setUser }) {
     const formData = new FormData();
     formData.append("name", profile.name);
     formData.append("email", profile.email);
-    if (password) formData.append("password", password);
+    if (password) {
+      if (!profile.currentPassword) {
+        alert("Please enter current password to set a new one");
+        return;
+      }
+      formData.append("password", password);
+      formData.append("currentPassword", profile.currentPassword);
+    }
     if (file) formData.append("profilePhoto", file);
 
     try {
-      const response = await axios.put(API_URL, formData, {
+      const response = await axiosInstance.put(API_URL, formData, {
         headers: { 
           Authorization: `Bearer ${user.token}`,
           "Content-Type": "multipart/form-data"
@@ -64,7 +71,7 @@ function Profile({ user, setUser }) {
           
           <div className="mb-4">
             <img 
-              src={profile.profilePhoto?.startsWith('http') ? profile.profilePhoto : `http://localhost:5000${profile.profilePhoto}`} 
+              src={getImageUrl(profile.profilePhoto)} 
               alt="Profile" 
               className="rounded-circle shadow-sm" 
               style={{ width: "150px", height: "150px", objectFit: "cover" }} 
@@ -81,6 +88,11 @@ function Profile({ user, setUser }) {
             <div className="mb-3">
               <label className="form-label fw-bold">Email</label>
               <input type="email" className="form-control" value={profile.email} onChange={e => setProfile({...profile, email: e.target.value})} required />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label fw-bold">Current Password (required to change password)</label>
+              <input type="password" className="form-control" placeholder="Enter current password" value={profile.currentPassword || ""} onChange={e => setProfile({...profile, currentPassword: e.target.value})} />
             </div>
 
             <div className="mb-3">

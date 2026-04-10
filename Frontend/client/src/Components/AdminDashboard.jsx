@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance, { getImageUrl } from "../config/axiosInstance";
 import ProductForm from "./ProductForm";
 
 function AdminDashboard() {
@@ -11,16 +11,19 @@ function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
 
+  const [orders, setOrders] = useState([]);
+
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.token;
 
   const authConfig = { headers: { Authorization: `Bearer ${token}` } };
-  const PRODUCTS_API = "http://localhost:5000/api/products";
-  const USERS_API = "http://localhost:5000/api/users";
+  const PRODUCTS_API = "/products";
+  const USERS_API = "/users";
+  const ORDERS_API = "/orders/all";
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(PRODUCTS_API);
+      const response = await axiosInstance.get(PRODUCTS_API);
       setProducts(response.data.data || []);
     } catch (error) {
       alert(error.response?.data?.message || "Failed to fetch products");
@@ -29,22 +32,34 @@ function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(USERS_API, authConfig);
+      const response = await axiosInstance.get(USERS_API, authConfig);
       setUsers(response.data.data || []);
     } catch (error) {
       alert(error.response?.data?.message || "Failed to fetch users");
     }
   };
 
+  const fetchOrders = async () => {
+    try {
+      const response = await axiosInstance.get(ORDERS_API, authConfig);
+      setOrders(response.data.data || []);
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to fetch orders");
+    }
+  };
+
   useEffect(() => {
     if (activeTab === "products") fetchProducts();
     if (activeTab === "users") fetchUsers();
+    if (activeTab === "orders") fetchOrders();
   }, [activeTab]);
 
   // ---- Product Methods ----
   const addProduct = async (data) => {
     try {
-      const res = await axios.post(PRODUCTS_API, data, authConfig);
+      const res = await axiosInstance.post(PRODUCTS_API, data, {
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" }
+      });
       alert(res.data.message);
       fetchProducts();
     } catch (error) { alert("Error adding product"); }
@@ -52,7 +67,9 @@ function AdminDashboard() {
 
   const updateProduct = async (id, data) => {
     try {
-      const res = await axios.put(`${PRODUCTS_API}/${id}`, data, authConfig);
+      const res = await axiosInstance.put(`${PRODUCTS_API}/${id}`, data, {
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" }
+      });
       alert(res.data.message);
       setEditingProduct(null);
       fetchProducts();
@@ -62,7 +79,7 @@ function AdminDashboard() {
   const deleteProduct = async (id) => {
     if (!window.confirm("Delete this product?")) return;
     try {
-      const res = await axios.delete(`${PRODUCTS_API}/${id}`, authConfig);
+      const res = await axiosInstance.delete(`${PRODUCTS_API}/${id}`, authConfig);
       alert(res.data.message);
       fetchProducts();
     } catch (error) { alert("Error deleting product"); }
@@ -77,7 +94,7 @@ function AdminDashboard() {
   const updateUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`${USERS_API}/${editingUser._id}`, editingUser, authConfig);
+      const res = await axiosInstance.put(`${USERS_API}/${editingUser._id}`, editingUser, authConfig);
       alert(res.data.message);
       setEditingUser(null);
       fetchUsers();
@@ -94,6 +111,7 @@ function AdminDashboard() {
           <div className="btn-group mt-3 bg-white rounded shadow-sm">
             <button className={`btn ${activeTab === 'products' ? 'btn-primary' : 'btn-light'}`} onClick={() => setActiveTab('products')}>Products</button>
             <button className={`btn ${activeTab === 'users' ? 'btn-primary' : 'btn-light'}`} onClick={() => setActiveTab('users')}>Users</button>
+            <button className={`btn ${activeTab === 'orders' ? 'btn-primary' : 'btn-light'}`} onClick={() => setActiveTab('orders')}>Orders</button>
           </div>
         </div>
 
@@ -140,7 +158,7 @@ function AdminDashboard() {
                     <tr key={u._id}>
                       <td>
                         <img 
-                          src={u.profilePhoto?.startsWith('http') ? u.profilePhoto : `http://localhost:5000${u.profilePhoto || '/uploads/default.png'}`} 
+                          src={getImageUrl(u.profilePhoto || '/uploads/default.png')} 
                           alt="avatar" 
                           width="40" height="40" 
                           className="rounded-circle object-fit-cover"
@@ -185,6 +203,49 @@ function AdminDashboard() {
                     <button type="button" className="btn btn-secondary" onClick={() => setEditingUser(null)}>Cancel</button>
                   </div>
                 </form>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === "orders" && (
+          <div className="card shadow border-0 p-4">
+            <h4 className="mb-4 fw-bold">Orders List</h4>
+            {orders.length === 0 ? (
+              <p className="text-muted">No orders found.</p>
+            ) : (
+              <div className="table-responsive">
+                <table className="table table-hover align-middle">
+                  <thead className="table-light">
+                    <tr>
+                      <th>Order ID</th>
+                      <th>User</th>
+                      <th>Items</th>
+                      <th>Total Price</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((o) => (
+                      <tr key={o._id}>
+                        <td><small className="text-muted">{o._id}</small></td>
+                        <td>
+                          <div className="fw-bold">{o.user?.name || "Unknown"}</div>
+                          <div className="text-muted small">{o.user?.email || "No email"}</div>
+                        </td>
+                        <td>
+                          <ul className="list-unstyled mb-0 small text-muted">
+                            {o.orderItems.map((item, idx) => (
+                              <li key={idx}>{item.qty} x {item.name}</li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td className="fw-bold text-success">{o.totalPrice} EGP</td>
+                        <td>{new Date(o.createdAt).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>

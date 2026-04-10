@@ -10,12 +10,13 @@ const {
 } = require("../controllers/productController");
 
 const { protect, authorizeRoles } = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware");
 
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 
-router.post("/", protect, authorizeRoles("admin"), createProduct);
-router.put("/:id", protect, authorizeRoles("admin"), updateProduct);
+router.post("/", protect, authorizeRoles("admin"), upload.single("image"), createProduct);
+router.put("/:id", protect, authorizeRoles("admin"), upload.single("image"), updateProduct);
 router.delete("/:id", protect, authorizeRoles("admin"), deleteProduct);
 
 module.exports = router;

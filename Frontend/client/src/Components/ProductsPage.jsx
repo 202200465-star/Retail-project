@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
 import ProductCard from "./ProductCard";
 
 function ProductsPage() {
@@ -7,12 +7,12 @@ function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const API_URL = "http://localhost:5000/api/products";
+  const API_URL = "/products";
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(API_URL);
+        const response = await axiosInstance.get(API_URL);
         setProducts(response.data.data || []);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load products");

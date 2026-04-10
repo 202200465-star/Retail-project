@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-function LandingPage({ setPage }) {
+function LandingPage() {
+  const navigate = useNavigate();
   return (
     <div className="landing-page-wrapper">
       {/* Hero Section */}
@@ -12,10 +14,10 @@ function LandingPage({ setPage }) {
           </p>
 
           <div className="d-flex justify-content-center gap-3 flex-wrap mt-4 animate-fade-in-up delay-1">
-            <button className="btn btn-lg btn-warning px-5 shadow-sm interactive-btn fw-bold" onClick={() => setPage("products")}>
+            <button className="btn btn-lg btn-warning px-5 shadow-sm interactive-btn fw-bold" onClick={() => navigate("/products")}>
               Shop Now
             </button>
-            <button className="btn btn-lg btn-outline-light px-5 shadow-sm interactive-btn fw-bold" onClick={() => setPage("about")}>
+            <button className="btn btn-lg btn-outline-light px-5 shadow-sm interactive-btn fw-bold" onClick={() => navigate("/about")}>
               Our Story
             </button>
           </div>
@@ -35,7 +37,7 @@ function LandingPage({ setPage }) {
               <div 
                 className="card border-0 rounded-4 overflow-hidden text-white interactive-card shadow-sm position-relative"
                 style={{ height: "300px", background: "url('https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=600&q=80') center/cover" }}
-                onClick={() => setPage("products")}
+                onClick={() => navigate("/products")}
               >
                 <div className="position-absolute w-100 h-100 bg-dark" style={{ opacity: 0.4 }}></div>
                 <div className="position-relative z-1 d-flex flex-column justify-content-end h-100 p-4">
@@ -48,7 +50,7 @@ function LandingPage({ setPage }) {
               <div 
                 className="card border-0 rounded-4 overflow-hidden text-white interactive-card shadow-sm position-relative"
                 style={{ height: "300px", background: "url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=600&q=80') center/cover" }}
-                onClick={() => setPage("products")}
+                onClick={() => navigate("/products")}
               >
                 <div className="position-absolute w-100 h-100 bg-dark" style={{ opacity: 0.4 }}></div>
                 <div className="position-relative z-1 d-flex flex-column justify-content-end h-100 p-4">
@@ -61,7 +63,7 @@ function LandingPage({ setPage }) {
               <div 
                 className="card border-0 rounded-4 overflow-hidden text-white interactive-card shadow-sm position-relative"
                 style={{ height: "300px", background: "url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80') center/cover" }}
-                onClick={() => setPage("products")}
+                onClick={() => navigate("/products")}
               >
                 <div className="position-absolute w-100 h-100 bg-dark" style={{ opacity: 0.4 }}></div>
                 <div className="position-relative z-1 d-flex flex-column justify-content-end h-100 p-4">

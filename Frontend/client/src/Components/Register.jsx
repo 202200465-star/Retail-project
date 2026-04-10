@@ -1,7 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
-function Register({ setPage }) {
+function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,6 +10,7 @@ function Register({ setPage }) {
   });
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -22,9 +24,9 @@ function Register({ setPage }) {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:5000/api/auth/register", formData);
+      await axiosInstance.post("/auth/register", formData);
       alert("Registered successfully");
-      setPage("login");
+      navigate("/login");
     } catch (error) {
       alert(error.response?.data?.message || "Register failed");
     } finally {

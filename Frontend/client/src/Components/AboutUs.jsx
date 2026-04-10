@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-function AboutUs({ setPage }) {
+function AboutUs() {
+  const navigate = useNavigate();
   return (
     <div className="about-page">
       <div className="about-hero d-flex align-items-center justify-content-center text-center text-white">
@@ -28,8 +30,8 @@ function AboutUs({ setPage }) {
               We are a team of dedicated developers, designers, and retail experts who believe your shopping experience should be entirely frictionless.
             </p>
             <div className="d-flex flex-wrap gap-3">
-              <button className="btn btn-primary px-4 py-2 interactive-btn" onClick={() => setPage("products")}>Explore Catalog</button>
-              <button className="btn btn-outline-dark px-4 py-2 interactive-btn" onClick={() => setPage("contact")}>Contact Leadership</button>
+              <button className="btn btn-primary px-4 py-2 interactive-btn" onClick={() => navigate("/products")}>Explore Catalog</button>
+              <button className="btn btn-outline-dark px-4 py-2 interactive-btn" onClick={() => navigate("/contact")}>Contact Leadership</button>
             </div>
           </div>
         </div>
@@ -69,7 +71,7 @@ function AboutUs({ setPage }) {
         </div>
         
         <div className="text-center mt-5 pt-4">
-          <button className="btn btn-primary btn-lg interactive-btn px-5 py-3" onClick={() => setPage('contact')}>
+          <button className="btn btn-primary btn-lg interactive-btn px-5 py-3" onClick={() => navigate('/contact')}>
             Get In Touch With Us
           </button>
         </div>
