@@ -3,10 +3,12 @@ import { useAuthStore } from '../stores/authStore'
 import { useCartStore } from '../stores/cartStore'
 import { getImageUrl } from '../services/api'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const authStore = useAuthStore()
 const cartStore = useCartStore()
 const router = useRouter()
+const dropdownOpen = ref(false)
 
 const handleLogout = () => {
   authStore.logout()
@@ -40,18 +42,54 @@ const handleLogout = () => {
             </span>
           </button>
 
-          <router-link class="btn btn-outline-info d-flex align-items-center gap-2 px-3 py-1 me-2" to="/profile">
-            <img 
-              :src="getImageUrl(authStore.user.profilePhoto || '/uploads/default.png')"
-              alt="Profile" 
-              class="rounded-circle object-fit-cover" 
-              style="width: 30px; height: 30px" 
-            />
-            <span class="fw-semibold">{{ authStore.user.name }}</span>
-          </router-link>
-
-          <router-link v-if="authStore.isAdmin" class="btn btn-success" to="/admin">Admin Dashboard</router-link>
-          <button class="btn btn-danger" @click="handleLogout">Logout</button>
+          <!-- Backdrop for closing dropdown -->
+          <div v-if="dropdownOpen" class="position-fixed top-0 start-0 w-100 h-100 z-1" @click="dropdownOpen = false" style="z-index: 1040;"></div>
+          
+          <div class="position-relative ms-2" style="z-index: 1050;">
+            <button 
+              class="btn btn-outline-info d-flex align-items-center gap-2 px-3 py-1 dropdown-toggle" 
+              @click="dropdownOpen = !dropdownOpen"
+            >
+              <img 
+                :src="getImageUrl(authStore.user.profilePhoto || '/uploads/default.png')"
+                alt="Profile" 
+                class="rounded-circle object-fit-cover" 
+                style="width: 30px; height: 30px" 
+              />
+              <span class="fw-semibold">{{ authStore.user.name }}</span>
+            </button>
+            
+            <!-- Custom Dropdown Menu -->
+            <ul v-if="dropdownOpen" class="dropdown-menu dropdown-menu-end show shadow-lg position-absolute mt-2 border-0 rounded-3 p-2" style="right: 0; min-width: 250px;">
+              <li>
+                <div class="px-3 py-2 text-muted small fw-bold text-uppercase">Account Security</div>
+              </li>
+              <li>
+                <router-link class="dropdown-item py-2 rounded-2 fw-semibold" to="/profile" @click="dropdownOpen = false">
+                  <i class="bi bi-person-circle me-2 text-primary"></i> Profile Settings
+                </router-link>
+              </li>
+              
+              <template v-if="authStore.isAdmin">
+                <li><hr class="dropdown-divider my-2"></li>
+                <li>
+                  <div class="px-3 py-1 text-muted small fw-bold text-uppercase">Management</div>
+                </li>
+                <li>
+                  <router-link class="dropdown-item py-2 rounded-2 fw-semibold text-success" to="/admin" @click="dropdownOpen = false">
+                    <i class="bi bi-shield-lock-fill me-2"></i> Admin Dashboard
+                  </router-link>
+                </li>
+              </template>
+              
+              <li><hr class="dropdown-divider my-2"></li>
+              <li>
+                <button class="dropdown-item py-2 rounded-2 fw-bold text-danger dropdown-btn w-100 text-start" @click="handleLogout">
+                  <i class="bi bi-box-arrow-right me-2"></i> Secure Logout
+                </button>
+              </li>
+            </ul>
+          </div>
         </template>
       </div>
     </div>
