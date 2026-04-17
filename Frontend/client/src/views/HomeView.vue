@@ -6,7 +6,7 @@ const router = useRouter()
 <template>
   <div class="home-wrapper">
     <!-- Hero Section -->
-    <header class="hero-section d-flex align-items-center position-relative overflow-hidden">
+    <header class="hero-section d-flex align-items-center position-relative overflow-hidden w-100">
       <div class="position-absolute w-100 h-100 bg-overlay"></div>
       <div class="container position-relative z-1 text-center text-white hero-content">
         <h1 class="display-3 fw-bolder mb-3 animate-fade-in-up">Redefining Digital Retail</h1>
@@ -64,9 +64,11 @@ const router = useRouter()
 
 <style scoped>
 .hero-section {
-  height: 85vh;
+  min-height: calc(100vh - 70px);
   background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
   background-attachment: fixed;
+  padding: 0;
+  margin: 0;
 }
 .bg-overlay {
   background: linear-gradient(135deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.4) 100%);

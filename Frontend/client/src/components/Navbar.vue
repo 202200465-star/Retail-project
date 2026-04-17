@@ -17,7 +17,9 @@ const handleLogout = () => {
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #0f172a;">
     <div class="container">
-      <router-link class="navbar-brand text-decoration-none text-white fw-bold fs-4 p-0" to="/">ShopSphere</router-link>
+      <router-link class="navbar-brand text-decoration-none text-white fw-bold fs-4 p-0 d-flex align-items-center" to="/">
+        <i class="bi bi-hexagon-half text-warning fs-3 me-2"></i> ShopSphere
+      </router-link>
 
       <div class="ms-auto d-flex gap-2 flex-wrap align-items-center">
         <router-link class="btn btn-outline-light" to="/">Home</router-link>
