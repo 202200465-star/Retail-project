@@ -20,15 +20,24 @@ const orderSchema = new mongoose.Schema(
         },
       },
     ],
+    shippingAddress: {
+      address: { type: String, default: "" },
+      city:    { type: String, default: "" },
+      country: { type: String, default: "" },
+    },
+    paymentMethod: {
+      type: String,
+      default: "Cash on Delivery",
+    },
     totalPrice: {
       type: Number,
       required: true,
       default: 0.0,
     },
-    isPaid: {
-      type: Boolean,
-      required: true,
-      default: false,
+    status: {
+      type: String,
+      enum: ["Pending", "Paid", "Shipped", "Delivered"],
+      default: "Pending",
     },
   },
   {

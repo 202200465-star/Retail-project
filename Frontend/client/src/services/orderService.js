@@ -9,5 +9,11 @@ export default {
   },
   getAllOrders() {
     return api.get('/orders/all')
+  },
+  getOrderById(id) {
+    return api.get(`/orders/${id}`)
+  },
+  updateOrderStatus(id, status) {
+    return api.put(`/orders/${id}/status`, { status })
   }
 }

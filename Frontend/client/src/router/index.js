@@ -26,6 +26,12 @@ const routes = [
     component: () => import('../views/CheckoutView.vue'),
     meta: { requiresAuth: true }
   },
+  {
+    path: '/my-orders',
+    name: 'MyOrders',
+    component: () => import('../views/MyOrdersView.vue'),
+    meta: { requiresAuth: true }
+  },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 

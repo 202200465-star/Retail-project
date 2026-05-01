@@ -69,6 +69,11 @@ const handleLogout = () => {
                   <i class="bi bi-person-circle me-2 text-primary"></i> Profile Settings
                 </router-link>
               </li>
+              <li>
+                <router-link class="dropdown-item py-2 rounded-2 fw-semibold" to="/my-orders" @click="dropdownOpen = false">
+                  <i class="bi bi-bag-check me-2 text-warning"></i> My Orders
+                </router-link>
+              </li>
               
               <template v-if="authStore.isAdmin">
                 <li><hr class="dropdown-divider my-2"></li>
