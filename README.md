@@ -1,145 +1,182 @@
+# 🛒 ShopSphere — Retail E-Commerce Platform
 
-# Name : Rahma Ahmed Fekry
-# ID : 202200465
->>>>>>> 175acb5 (adding server for backend and front end and testing them)
-# Retail-project ecommerce
-Full-stack B2C retail e-commerce web application developed using react.js and node.js / express  Includes product catalog, authentication, shopping cart, and checkout system.
+## 👤 Project Information
+- **Name:** Rahma Ahmed Fekry  
+- **ID:** 202200465  
+
+---
+
 # 📌 Project Overview
 
-This project is a full-stack B2C retail e-commerce web application developed as part of the EC385 Introduction to E-Business course.
+ShopSphere is a modern full-stack B2C retail e-commerce web application developed as part of the **EC385 – Introduction to E-Business** course.
 
-The platform enables customers to browse products, manage shopping carts, and securely complete purchases through an integrated digital system.
+The platform provides customers with a complete digital shopping experience including:
 
-The system bridges theoretical e-business concepts with practical full-stack implementation.
+- Product browsing
+- Authentication & authorization
+- Shopping cart management
+- Secure checkout
+- Order tracking
+- Admin product & order management
+
+The project combines theoretical e-business concepts with real-world full-stack software engineering practices.
+
+---
 
 # 🎯 Business Model
 
-Model Selected: B2C (Business-to-Consumer)
+## Selected Model: B2C (Business-to-Consumer)
 
-This model allows a retail business to sell products directly to customers via an online storefront.
+The system allows businesses to sell products directly to end users through an online storefront.
 
-Why B2C?
+### Why B2C?
+- Direct customer interaction
+- Scalable digital operations
+- Real-time online transactions
+- Personalized shopping experience
+- Modern e-commerce workflow implementation
 
-Direct customer engagement
+---
 
-Scalable digital operations
+# 🚀 Key Features
 
-Real-time transaction processing
+## Customer Features
+- User Registration & Authentication
+- JWT-Based Secure Login
+- Product Catalog & Categories
+- Product Search & Filtering
+- Shopping Cart System
+- Wishlist & Favorites
+- Secure Checkout Process
+- Order History & Tracking
+- Responsive Modern UI
+- FAQ / Help Center
 
-Personalized shopping experiences
+## Admin Features
+- Admin Dashboard
+- Product CRUD Operations
+- Order Monitoring & Tracking
+- Order Status Workflow:
+  - Pending
+  - Paid
+  - Shipped
+  - Delivered
+- User Monitoring
+- Analytics & Statistics
+
+---
 
 # 🏗️ System Architecture
 
-The application follows a modern three-layer architecture:
+## Frontend Layer
+- Vue.js SPA Architecture
+- Responsive UI/UX Design
+- Vue Router Navigation
+- State Management
+- API Integration
+- Dynamic Components
 
-1️⃣ Frontend Layer
+## Backend Layer
+- RESTful API Architecture
+- Express.js Server
+- JWT Authentication
+- Role-Based Authorization
+- Middleware Architecture
+- MVC Design Pattern
 
-Responsive UI design
+## Database Layer
+- MongoDB Database
+- Product Management
+- User Accounts
+- Orders & Transactions
+- Cart Persistence
 
-Product browsing & filtering
-
-Shopping cart functionality
-
-User authentication interface
-
-Order tracking dashboard
-
-2️⃣ Backend Layer
-
-RESTful API services
-
-Authentication & authorization
-
-Product & inventory management
-
-Order processing system
-
-Payment logic handling
-
-3️⃣ Database Layer
-
-User data storage
-
-Product catalog management
-
-Order records
-
-Inventory tracking
-
-# 🔐 Core Features
-
-User Registration & Login
-
-Role-Based Access (Admin / Customer)
-
-Product Catalog with Categories
-
-Search & Filter Functionality
-
-Shopping Cart System
-
-Secure Checkout Process
-
-Order History & Tracking
-
-Admin Dashboard for Product Management
-
-# 💰 Revenue Model
-
-The platform operates using a Direct Transaction Revenue Model, where revenue is generated through product sales.
-
-Future monetization possibilities:
-
-Advertising integration
-
-Affiliate marketing
-
-Premium membership services
-
-☁️ Deployment Strategy
-
-The application will be deployed to a cloud environment to ensure:
-
-Scalability
-
-High Availability
-
-Security
-
-Performance Optimization
+---
 
 # 🛠️ Technology Stack
-Frontend:
-   React.js (Vite) 
 
-Backend:
+## Frontend
+- Vue.js
+- Vue Router
+- Bootstrap 5
+- Bootstrap Icons
+- Axios
 
- Node.js / express
+## Backend
+- Node.js
+- Express.js
+- JWT Authentication
+- Multer
+- bcrypt.js
 
-Database:
+## Database
+- MongoDB
+- Mongoose ODM
 
-MongoDB / MySQL / PostgreSQL (TBD)
+## Dev Tools
+- Git & GitHub
+- Nodemon
+- Vite
 
-Version Control:
+---
 
-Git & GitHub
+# 🔐 Security Features
+- JWT Authentication
+- Protected Routes
+- Role-Based Access Control
+- Password Hashing
+- Secure API Middleware
+- Session Management
 
-# 📊 Academic Alignment
+---
 
-This project satisfies the course requirements by:
+# 📊 Revenue Model
 
-Selecting a valid e-business model
+The platform currently uses a **Direct Transaction Revenue Model** where revenue is generated through product sales.
 
-Implementing full-stack architecture
+### Future Expansion
+- Affiliate Marketing
+- Advertising Integration
+- Premium Memberships
+- Multi-Vendor Marketplace
 
-Using version control best practices
+---
 
-Demonstrating weekly development progress
+# ☁️ Deployment Strategy
 
-Integrating business strategy with technical execution
+The project is designed for cloud deployment to ensure:
+
+- Scalability
+- High Availability
+- Performance Optimization
+- Secure Hosting
+- Production Readiness
+
+---
+
+# 📚 Academic Alignment
+
+This project satisfies EC385 course requirements through:
+
+- E-business model implementation
+- Full-stack architecture development
+- Real-world e-commerce workflow
+- Version control best practices
+- Business & technical integration
+- Continuous weekly development
+
+---
 
 # 👥 Contributors
 
-202200465 – Project Developer
+## Developer
+- **Rahma Ahmed Fekry** — 202200465
 
-Course Instructors (Invited as collaborators)
+## Course
+EC385 — Introduction to E-Business  
+Faculty of Engineering — Pharos University in Alexandria
+
+---
+
+# 📄 License
+This project is developed for academic and educational purposes.

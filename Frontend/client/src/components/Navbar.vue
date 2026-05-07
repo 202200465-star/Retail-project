@@ -28,7 +28,7 @@ const handleLogout = () => {
         <router-link class="btn btn-outline-light" to="/products">Products</router-link>
         <router-link class="btn btn-outline-light" to="/about">About Us</router-link>
         <router-link class="btn btn-outline-light" to="/contact">Contact Us</router-link>
-
+<router-link class="btn btn-outline-light" to="/faq">FAQ</router-link>
         <template v-if="!authStore.isAuthenticated">
           <router-link class="btn btn-warning" to="/login">Login</router-link>
           <router-link class="btn btn-light" to="/register">Register</router-link>

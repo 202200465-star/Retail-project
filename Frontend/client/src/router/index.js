@@ -6,17 +6,18 @@ const routes = [
   { path: '/products', name: 'Products', component: () => import('../views/ProductsView.vue') },
   { path: '/about', name: 'About', component: () => import('../views/AboutView.vue') },
   { path: '/contact', name: 'Contact', component: () => import('../views/ContactView.vue') },
+  { path: '/faq', name: 'FAQ', component: () => import('../views/FaqView.vue') },
   { path: '/login', name: 'Login', component: () => import('../views/LoginView.vue') },
   { path: '/register', name: 'Register', component: () => import('../views/RegisterView.vue') },
-  { 
-    path: '/profile', 
-    name: 'Profile', 
+  {
+    path: '/profile',
+    name: 'Profile',
     component: () => import('../views/ProfileView.vue'),
     meta: { requiresAuth: true }
   },
-  { 
-    path: '/admin', 
-    name: 'Admin', 
+  {
+    path: '/admin',
+    name: 'Admin',
     component: () => import('../views/AdminView.vue'),
     meta: { requiresAuth: true, requiresAdmin: true }
   },
@@ -42,15 +43,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     return next('/login')
   }
-  
+
   if (to.meta.requiresAdmin && !authStore.isAdmin) {
     return next('/products')
   }
-  
+
   next()
 })
 
